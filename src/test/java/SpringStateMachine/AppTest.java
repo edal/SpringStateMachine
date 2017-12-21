@@ -99,4 +99,19 @@ public class AppTest
         stateMachine.sendEvent(Events.MODELO_MODIFICADO);
         assertEquals("Tras evento MODELO_MODIFICADO el estado debe ser CERRADA", States.CERRADA, stateMachine.getState().getId());                    
     }   
+    
+    public void testWrongTransition() throws Exception
+    {
+        
+        StateMachine<States, Events> stateMachine = StateMachineConfig.buildMachine();
+        
+        stateMachine.start();
+        assertEquals("El primer estado debe ser NUEVA", States.NUEVA, stateMachine.getState().getId());
+        
+        stateMachine.sendEvent(Events.APROBADA_OWNER);
+        assertEquals("Tras evento APROBADA_OWNER en estado NUEVA el estado debe continuar siendo NUEVA", States.NUEVA, stateMachine.getState().getId());            
+                     
+    }   
+    
+    
 }
